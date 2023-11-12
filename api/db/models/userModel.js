@@ -1,19 +1,22 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-    _taskId:{
-        type: mongoose.Types.ObjectId,
-        require: true
-    },
-    _commentId: {
-        type: mongoose.Types.ObjectId, 
-        require: true
-    },
+    _taskId:[{
+        type: mongoose.Types.ObjectId
+    }],
+    _commentId: [{
+        type: mongoose.Types.ObjectId
+    }],
     username: {
         type: String,
         required: true,
         unique: true,
-        minlength: [5, 'Username should be at least 5 characters']
+        minlength: [4, 'Username should be at least 5 characters']
+    }, 
+    password: {
+        type: String,
+        require: true,
+        minlength: [4, 'Password should be at least 5 characters']
     }
 });
 

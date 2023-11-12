@@ -1,0 +1,55 @@
+[
+  {
+    "createdDate": "20/12/2020",
+    "requiredDate": "01/01/2021",
+    "description": "Test open task",
+    "status": "opened",
+    "taskType": "frontend",
+    "nextActionDate": "25/12/2020",
+    "_id": "1q2w3e"
+  },
+  {
+    "createdDate": "20/12/2020",
+    "requiredDate": "01/01/2021",
+    "description": "Test closed task",
+    "status": "closed",
+    "taskType": "frontend",
+    "nextActionDate": "25/12/2020",
+    "_id": "2q2w3e"
+  },
+  {
+    "createdDate": "20/12/2020",
+    "requiredDate": "01/01/2021",
+    "description": "Test in progress",
+    "status": "inProgress",
+    "taskType": "frontend",
+    "nextActionDate": "25/12/2020",
+    "_id": "3q2w3e"
+  },
+  {
+    "createdDate": "01/01/2022",
+    "requiredDate": "01/05/2022",
+    "description": "Test 2022 -1",
+    "status": "opened",
+    "taskType": "serverTask",
+    "nextActionDate": "25/12/2022",
+    "_id": "4q2w3e"
+  },
+  {
+    "createdDate": "01/02/2022",
+    "requiredDate": "01/06/2022",
+    "description": "Test 2022 - 2",
+    "status": "opened",
+    "taskType": "beckend",
+    "nextActionDate": "25/12/2022",
+    "_id": "5q2w3e"
+  },
+  {
+    "createdDate": "01/03/2022",
+    "requiredDate": "01/01/2021",
+    "description": "Test 2022 - 3 without next action date",
+    "status": "opened",
+    "taskType": "frontend",
+    "_id": "6q2w3e"
+  }
+]

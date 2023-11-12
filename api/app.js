@@ -1,23 +1,28 @@
 const express = require('express');
 const task = express();
 const comments = express();
-
-// const{mongoose} = require('./db/mongoose');
+const os = require('os');
 
 const{mongoose} = require('../api/index');
 task.use(express.json());
-
-// const bodyParser = require('body-parser');
-// task.use(bodyParser.urlencoded());
-// task.use(bodyParser.json());
+// const{autoLog} = require('./auth');
 
 //Load in the mongoose models
 const {Task} = require('./db/models/task.model');
 const {Comment} = require('./db/models/comment.model');
 const {User} = require('./db/models/userModel');
 
+//Login test user
 task.get('/', (req,res) => {
-    res.send('Hello!');
+    // res.send('Hello!');
+    const username = 'testUser';
+    const password = 'test';
+    const testUser = new User({username, password});
+    testUser.save()
+    .then((user) => {
+        res.send("Hello Test User!")
+    })
+
 })
 
 /**
@@ -74,7 +79,8 @@ comments.post('/tasks/:taskId/comments', (req, res) => {
 
     let newComment = new Comment({
         dateAdded, text, commentType, reminderDate,
-         _taskId: req.params.taskId
+         _taskId: req.params.taskId, 
+         _userId: os.userInfo().uid
     });
     newComment.save().then((commentDoc) => {
         res.send(commentDoc);

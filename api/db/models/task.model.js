@@ -36,14 +36,9 @@ const TaskSchema = new mongoose.Schema({
         type: ObjectId,
         ref: "User"
     }],
-    _commentId:[{
-        type: ObjectId,
-        ref: "Comment"
-    }]
-    // nextActionDate: {
-    //     type: mongoose.Types.reminderDate,
-    //     ref: "Comment"
-    // }
+    nextActionDate: {
+        type: String
+    }
 })
 
 const Task = mongoose.model('Task', TaskSchema);

@@ -16,23 +16,6 @@ async function run() {
   }
   run().catch(console.dir);
 
-
-  // const fs = require('node:fs');
-  // fs.readFile('./db/freelancer.json', "utf8", (err, jsonString) => {
-  //   if (err) {
-  //     console.log("File read failed:", err);
-  //     return;
-  //   }
-  //   // try {
-  //   //   const jsonString = fs.readFileSync('./db/freelancer.json');
-  //   //   const customer = JSON.parse(jsonString);
-  //   //   console.log('Customer name is:', customer.name )
-  //   // }catch (err) {
-  //   //   console.log("Error parsing JSON string:", err);
-  //   // }
-  //   console.log("File data:", jsonString);
-  // });
-
   module.exports = {run}
 
   
