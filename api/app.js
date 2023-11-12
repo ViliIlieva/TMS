@@ -5,6 +5,7 @@ const comments = express();
 // const{mongoose} = require('./db/mongoose');
 
 const{mongoose} = require('../api/index');
+task.use(express.json());
 
 // const bodyParser = require('body-parser');
 // task.use(bodyParser.urlencoded());
@@ -14,6 +15,10 @@ const{mongoose} = require('../api/index');
 const {Task} = require('./db/models/task.model');
 const {Comment} = require('./db/models/comment.model');
 const {User} = require('./db/models/userModel');
+
+task.get('/', (req,res) => {
+    res.send('Hello!');
+})
 
 /**
  * GET/tasks
