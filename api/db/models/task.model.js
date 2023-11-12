@@ -23,14 +23,16 @@ const TaskSchema = new mongoose.Schema({
         enum: ['opened',
             'inProgress',
             'closed'],
-        default: 'opened'
+        default: 'inProgress',
+        require: true
     },
     taskType: {
         type: String,
         enum: ['frontend',
-            'beckend',
+            'backend',
             'serverTask'],
-        default: 'frontend'
+        default: 'frontend',
+        require: true
     },  
     assignedTo:[{
         type: ObjectId,

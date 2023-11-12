@@ -4,8 +4,23 @@ const comments = express();
 const os = require('os');
 
 const{mongoose} = require('../api/index');
+
 task.use(express.json());
-// const{autoLog} = require('./auth');
+
+task.use(function (req,res,next) {
+    const username = 'testUser';
+    const password = 'test';
+
+    User.findOne().then((user) => {
+        res.send('Hello!' + user);
+    
+            if(user === null){
+                const testUser = new User({username, password});
+                testUser.save() 
+            }
+    })
+})
+
 
 //Load in the mongoose models
 const {Task} = require('./db/models/task.model');
@@ -14,15 +29,7 @@ const {User} = require('./db/models/userModel');
 
 //Login test user
 task.get('/', (req,res) => {
-    // res.send('Hello!');
-    const username = 'testUser';
-    const password = 'test';
-    const testUser = new User({username, password});
-    testUser.save()
-    .then((user) => {
-        res.send("Hello Test User!")
-    })
-
+    //  res.send('Hello!');
 })
 
 /**
@@ -43,9 +50,10 @@ task.post('/tasks', (req, res) => {
     let description = req.body.description;
     let status = req.body.status;
     let taskType = req.body.taskType;
+    let nextActionDate = req.body.nextActionDate;
 
     let newTask = new Task({
-        createdDate, requiredDate, description, status, taskType
+        createdDate, requiredDate, description, status, taskType, nextActionDate
     });
     newTask.save().then((taskDoc) => {
         res.send(taskDoc);
