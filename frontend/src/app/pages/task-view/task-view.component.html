@@ -2,115 +2,52 @@
     <div class="task-manager-container">
 
         <div class="sidebar has-background-white">
-            <h1 class=" title has-text-primary">
-                Lists
-            </h1>
-
-            <div class="list-menu">
             
-                <a href="" class="list-menu-item is-active">
+            <div class="list-menu">
+                <a href="/tasks" class="list-menu-item" (click)="loadAllTasks" routerLink="is-active">
+                    <p>ALL TASKS</p>
+                </a>
+                <a href="" class="list-menu-item" id="opened" onclick="reply_click(this.id)" routerLink="is-active">
                     <p>Opened</p>
                 </a>
-                <a href="" class="list-menu-item">
+                <a href="" class="list-menu-item" id="closed" onclick="reply_click(this.id)" routerLink="is-active">
                     <p>Closed</p>
                 </a>
-                <a href="" class="list-menu-item">
+                <a href="" class="list-menu-item" id="inProgress" onclick="reply_click(this.id)" routerLink="is-active">
                     <p>In progres</p>
                 </a>
             </div>
 
-            <button class="button is-primary has-text-white"> ALL TASKS</button>
-        </div>
-
-        
-
-        <div class="task-list-container has-background-light">
-            <h1 class=" title has-text-primary">
-                Tasks
-            </h1>
-
-            <table class="task">
-                <thead>
-                    <tr>
-                        <th>Created date</th>
-                        <th>Required by Date</th>
-                        <th>Status</th>
-                        <th>Type</th>
-                    </tr>
-                 </thead>
-
-                    <tbody>
+            <div class="task-list-container has-background-light"
+            >
+                <h1 class=" title has-text-primary">
+                    Tasks
+                </h1>
+    
+                <a *ngFor="let task of tasks" [routerLink]="['/tasks', task._id, 'comments']">
+                <table class="task" >
+                    <thead>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <th>Created date : {{task.createdDate}}</th>
+                            <th>Required by Date : {{task.requiredDate}}</th>
+                            <th>Status : {{task.status}}</th>
+                            <th>Type : {{task.taskType}}</th>
                         </tr>
-                        <tr>
-                            <p class="task-description">Something I have to do hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhjesjdfljwoiejkldjfk;j;ksdf;aslkj;lkdnfkndkngkfjnadk kjsdfkjf c sj ksdjf;j;osj;odfnsjef</p>
-                        </tr>
-                        <th class="sec-row">Assigned to</th>
-                        <button class="button is-primary has-text-white comments-btn is-active">
-                            All Comments
-                        </button>
-                    </tbody>
-            </table>
-
-            <table class="task">
-                <thead>
-                    <tr>
-                        <th>Created date</th>
-                        <th>Required by Date</th>
-                        <th>Status</th>
-                        <th>Type</th>
-                
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <p class="task-description">Something I have to do hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhjesjdfljwoiejkldjfk;j;ksdf;aslkj;lkdnfkndkngkfjnadk kjsdfkjf c sj ksdjf;j;osj;odfnsjef</p>
-                        </tr>
-                        <th class="sec-row">Assigned to</th>
-                        <button class="button is-primary has-text-white comments-btn is-active">
-                            All Comments
-                        </button>
-                    </tbody>
-            </table>
-
-            <table class="task">
-                <thead>
-                    <tr>
-                        <th>Created date</th>
-                        <th>Required by Date</th>
-                        <th>Status</th>
-                        <th>Type</th>
-                
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <p class="task-description">Something I have to do hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhjesjdfljwoiejkldjfk;j;ksdf;aslkj;lkdnfkndkngkfjnadk kjsdfkjf c sj ksdjf;j;osj;odfnsjef</p>
-                        </tr>
-                        <th class="sec-row">Assigned to</th>
-                        <button class="button is-primary has-text-white comments-btn is-active">
-                            All Comments
-                        </button>
-                    </tbody>
-            </table>
+                     </thead>
+    
+                        <tbody>
+                            <tr>
+                                <p class="task-description"> {{task.description}} </p>
+                            <th class="sec-row">Assigned to : {{task.assignedTo}}</th>
+                            <!-- <button class="button is-primary has-text-white comments-btn is-active"
+                            >
+                                All Comments
+                            </button> -->
+                            </tr>
+                        </tbody>
+                </table>
+                </a>
+            </div>
         </div>
     </div>
 </div>

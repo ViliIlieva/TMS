@@ -1,0 +1,81 @@
+
+
+<div class="centered-content">
+    <div class="modal-box">
+      <button routerLink="/" class="button">Back</button>
+        <h1 class="title">
+            Add new Comment
+        </h1>
+
+        <div class="field is-grouped">
+            <p class="control is-expanded">
+              <input class="input has-background-light is-medium" 
+              #AddedDataInput
+                type="text" 
+                placeholder="01/01/2020 date added">
+            </p>
+            <p class="control is-expanded">
+                <input id="text" class="input has-background-light is-medium" 
+                #CommentInput
+                type="text" 
+                placeholder="Comment">
+            </p>
+                <div class="control is-expanded ">
+                  <div class="select is-fullwidth ">
+                    <select name="country" class="has-background-light is-medium">
+                      <option #typeInpyt value="ADVISORY">ADVISORY</option>
+                      <option #typeInpyt value="EVALUATIVE">EVALUATIVE</option>
+                      <option #typeInpyt value="DISCRIPTIVE">DISCRIPTIVE</option>
+                    </select>
+                  </div>
+                </div>
+                <p class="control is-expanded">
+                    <input #ReminderDateInpyt class="input has-background-light is-medium" type="text" placeholder="01/01/2020 Reminder Date">
+                </p>
+            <p class="control">
+              <a class="button is-primary has-text-white is-medium" (click)="addCommentToTask(
+                AddedDataInput.value, CommentInput.value, typeInpyt.value, ReminderDateInpyt.value
+              )">
+                Submit
+              </a>
+            </p>
+            
+          </div>
+    </div>
+
+    <div class="comment-list-container has-background-light">
+      <h1 class=" title has-text-primary">
+          Comments
+      </h1>
+    
+     <div class="comment-header">
+      <div class="search">
+          <label for="site-search">Search: </label>
+      <input type="search" id="site-search" name="q" />
+      <button> Search </button>
+      </div>
+    
+     </div>
+    
+      <table class="task" *ngFor="let comment of comments">
+              <thead>
+                  <th class="sec-row">Date Added : {{comment.dateAdded}}</th>
+                  <th class="sec-row">Reminder Date : {{comment.reminderDate}}</th>
+              </thead>
+              <tbody>
+                  <tr>
+                      <p class="task-description">{{comment.text}}</p>
+                  </tr>
+                  <th class="sec-row">Comment Type : {{comment.commentType}}</th>
+                  <button class="button is-primary has-text-white comments-btn is-active">
+                      Edit
+                  </button>
+                  <button class="button is-primary has-text-white comments-btn is-active">
+                      Delete
+                  </button>
+              </tbody>
+      </table>
+      
+    </div>
+</div>
+
