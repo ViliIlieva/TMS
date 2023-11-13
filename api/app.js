@@ -6,23 +6,18 @@ const{mongoose} = require('./index');
 
 app.use(express.json());
 
+//CORS HEADERS MIDDLEWARE
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
 //Load in the mongoose models
 const {Task} = require('./db/models/task.model');
 const {Comment} = require('./db/models/comment.model');
 const {User} = require('./db/models/userModel');
 
-//Auto log test user
-app.get('/', (req,res) => { 
-    const username = 'testUser';
-    const password = 'test';
-    User.findOne().then((user) => {
-            if(user === null){
-                const testUser = new User({username, password});
-                testUser.save() 
-            }  
-            res.send('Hello!' + username); 
-    })
-})
 
 /**
  * GET/tasks
@@ -34,6 +29,16 @@ app.get('/tasks', (req, res) => {
     }).catch((e) => {
         res.send(e);
     });
+
+    const username = 'testUser';
+    const password = 'test';
+    User.findOne().then((user) => {
+            if(user === null){
+                const testUser = new User({username, password});
+                testUser.save() 
+            }  
+            // res.send('Hello!' + username); 
+    })
 });
 
 app.post('/tasks', (req, res) => { 
@@ -111,6 +116,27 @@ app.delete('/comments/:id', (req, res) => {
     }).then((removedCommentDoc) => {
         res.send(removedCommentDoc);
     })
+})
+
+
+app.get('/tasks/:taskId/comments', (req, res) => {
+    //We wont to return an array of all the coments in one task in DB
+    Comment.find({
+        _taskId: req.params.taskId
+    }).then((coments) => {
+        res.send(coments);
+    });
+})
+/**
+ * GET/tasks/:taskId/comments/by-date
+ */
+app.get('/tasks/:taskId/comments/by-date', (req, res) => {
+    //We wont to return an array of all the coments by date in one task
+    Comment.find({
+        _taskId: req.params.taskId
+    }).then((coments) => {
+        res.send(coments);
+    });
 })
 
 app.listen(3000, () => {
