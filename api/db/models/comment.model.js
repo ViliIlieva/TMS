@@ -3,7 +3,7 @@ const { ObjectId } = mongoose.Schema.Types;
 
 const CommentSchema = new mongoose.Schema({
     dateAdded: {
-        type: Date,
+        type: String,
         require: true, 
         trim: false
     },
@@ -18,10 +18,6 @@ const CommentSchema = new mongoose.Schema({
             'DISCRIPTIVE'],
         default: 'DISCRIPTIVE' 
     },
-    _userId: {
-        type: mongoose.Types.ObjectId,
-        required: true
-    },
     _taskId:{
         type: mongoose.Types.ObjectId,
         required: true
@@ -32,7 +28,6 @@ const CommentSchema = new mongoose.Schema({
         trim: false
     }
 });
-
 
 const Comment = mongoose.model('Comment', CommentSchema);
 

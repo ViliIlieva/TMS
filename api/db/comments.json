@@ -3,7 +3,6 @@
       "dateAdded": "21/12/2020",
       "text": "Test open task comment",
       "commentType": "ADVISORY",
-      "_userId": "t1y2u3",
       "_taskId": "1q2w3e",
       "reminderDate": "25/12/2020",
       "_id": "00tyu"
@@ -12,7 +11,6 @@
         "dateAdded": "22/12/2020",
         "text": "Test open task comment",
         "commentType": "ADVISORY",
-        "_userId": "t1y2u3",
         "_taskId": "1q2w3e",
         "reminderDate": "25/12/2020",
         "_id": "01tyu"
@@ -21,7 +19,6 @@
         "dateAdded": "23/12/2020",
         "text": "Test open task comment",
         "commentType": "ADVISORY",
-        "_userId": "t1y2u4",
         "_taskId": "1q2w3e",
         "reminderDate": "25/12/2020",
         "_id": "02tyu"

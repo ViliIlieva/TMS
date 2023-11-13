@@ -1,42 +1,34 @@
 const express = require('express');
-const task = express();
-const comments = express();
-const os = require('os');
+const app = express();
+// const localStorage = require('local-storage');
 
-const{mongoose} = require('../api/index');
+const{mongoose} = require('./index');
 
-task.use(express.json());
-
-task.use(function (req,res,next) {
-    const username = 'testUser';
-    const password = 'test';
-
-    User.findOne().then((user) => {
-        res.send('Hello!' + user);
-    
-            if(user === null){
-                const testUser = new User({username, password});
-                testUser.save() 
-            }
-    })
-})
-
+app.use(express.json());
 
 //Load in the mongoose models
 const {Task} = require('./db/models/task.model');
 const {Comment} = require('./db/models/comment.model');
 const {User} = require('./db/models/userModel');
 
-//Login test user
-task.get('/', (req,res) => {
-    //  res.send('Hello!');
+//Auto log test user
+app.get('/', (req,res) => { 
+    const username = 'testUser';
+    const password = 'test';
+    User.findOne().then((user) => {
+            if(user === null){
+                const testUser = new User({username, password});
+                testUser.save() 
+            }  
+            res.send('Hello!' + username); 
+    })
 })
 
 /**
  * GET/tasks
  * Get all tasks
  * */
-task.get('/tasks', (req, res) => {
+app.get('/tasks', (req, res) => {
     Task.find().then((tasks) => {
         res.send(tasks);
     }).catch((e) => {
@@ -44,7 +36,7 @@ task.get('/tasks', (req, res) => {
     });
 });
 
-task.post('/tasks', (req, res) => { 
+app.post('/tasks', (req, res) => { 
     let createdDate = req.body.createdDate;
     let requiredDate = req.body.requiredDate;
     let description = req.body.description;
@@ -64,7 +56,7 @@ task.post('/tasks', (req, res) => {
  * GET/tasks/:taskId/comments
  * Get all comments with id task
  */
-comments.get('/tasks/:taskId/comments', (req, res) => {
+app.get('/tasks/:taskId/comments', (req, res) => {
     //We wont to return an array of all the coments in one task in DB
     Comment.find({
         _taskId: req.params.taskId
@@ -77,18 +69,18 @@ comments.get('/tasks/:taskId/comments', (req, res) => {
  * POST/tasks/:taskId/comments
  * Create comment
  */
-comments.post('/tasks/:taskId/comments', (req, res) => {
+app.post('/tasks/:taskId/comments', (req, res) => {
     //we wont to creare new coment and return list of coments back which includes id
-    //The list information (fields) will be passed in via JSON request body
+    //The list information (fields) will be parssed in via JSON request body
     let dateAdded = req.body.dateAdded;
     let text = req.body.text;
     let commentType = req.body.commentType;
     let reminderDate = req.body.reminderDate;
 
+
     let newComment = new Comment({
         dateAdded, text, commentType, reminderDate,
-         _taskId: req.params.taskId, 
-         _userId: os.userInfo().uid
+         _taskId: req.params.taskId
     });
     newComment.save().then((commentDoc) => {
         res.send(commentDoc);
@@ -96,14 +88,13 @@ comments.post('/tasks/:taskId/comments', (req, res) => {
 })
 
 /**
- * PATCH/comments/:id
+ * PATCH/comments/:commentId
  * Update existing comment
  */
-comments.patch('/tasks/:taskId/comments/:commentId', (req, res) => {
+app.patch('/comments/:commentId', (req, res) => {
     //we wont to update an existing comment
     Comment.findOneAndUpdate({
-        _id: req.params.commentId,
-        _taskId: req.params.taskId},{
+        _id: req.params.commentId},{
         $set: req.body
     }).then(() => {
         res.sendStatus(200);
@@ -114,7 +105,7 @@ comments.patch('/tasks/:taskId/comments/:commentId', (req, res) => {
  * DELETE/comments/:id
  * Delete comment
  */
-comments.delete('/comments/:id', (req, res) => {
+app.delete('/comments/:id', (req, res) => {
     Comment.findOneAndDelete({
         _id: req.params.id
     }).then((removedCommentDoc) => {
@@ -122,8 +113,7 @@ comments.delete('/comments/:id', (req, res) => {
     })
 })
 
-task.listen(3000, () => {
+app.listen(3000, () => {
     console.log("Server is listening on port 3000");
 })
-
 
